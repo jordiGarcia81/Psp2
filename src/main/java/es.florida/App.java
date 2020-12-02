@@ -1,32 +1,21 @@
 package es.florida;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.io.IOException;
+import java.util.List;
 
 public class App {
+    public static void main(String[] args) throws IOException {
+        MemberCreator memberCreator = new MemberCreator();
+        MemberMonitor memberMonitor = new MemberMonitor();
+        MailSender mailSender = new MailSender();
 
-    public  static void main(String[]args) throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.shutdown();
+        Thread memberCreatorThread = new Thread(memberCreator);
+        Thread memberMonitorThread = new Thread(memberMonitor);
+        Thread mailSenderThread = new Thread(mailSender);
 
-        if(!executorService.awaitTermination(2, TimeUnit.SECONDS)){
-           executorService.shutdownNow() ;
-        }
-
-        /*Thread thread1 = new Thread(new ChildTask());
-        Thread thread2 = new Thread(new ChildTask());
-        Thread thread3 = new Thread(new ChildTask());
-
-        thread1.start();
-        thread2.start();
-        thread3.start();*/
+        memberCreatorThread.start();
+        memberMonitorThread.start();
+        mailSenderThread.start();
     }
-
 }
