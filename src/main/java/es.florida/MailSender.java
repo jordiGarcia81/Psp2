@@ -25,7 +25,10 @@ public class MailSender implements Runnable {
         FileReader fr = null;
         BufferedReader br = null;
         String linea;
-        //Array de objetos ObjectMail
+        ObjectMail[] arrObj;
+
+
+
 
         try {
 
@@ -33,9 +36,9 @@ public class MailSender implements Runnable {
             br = new BufferedReader(fr);
 
             while ((linea = br.readLine()) != null){
-                //Crear objeto
-                //Split de linea
-                //Añadir a la lista de Objetos ADD
+                arrObj= new ObjectMail[0];
+                String arrSplit = arrObj.split(" ");
+                ObjectMail.Add(arrSplit);
             }
             fr.close();
             br.close();
