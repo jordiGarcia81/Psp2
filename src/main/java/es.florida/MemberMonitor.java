@@ -51,11 +51,14 @@ public class MemberMonitor implements Runnable{
             }
             if(auxLineas > 0 && numLineas!=auxLineas){
                 numLineas=auxLineas;
-                lock.lock();
+
+                lock.lock(); //
+
                 MailSender mailSender = new MailSender(lineaAux);
                 Thread  mailSenderThread = new Thread(mailSender);
                 mailSenderThread.start();
-                lock.unlock();
+
+                lock.unlock(); //
 
             }
 

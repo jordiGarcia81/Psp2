@@ -789,7 +789,7 @@ public abstract class Email
     public Email addTo(final LinkedList<String> emails)
         throws EmailException
     {
-        if (emails == null || emails.length == 0)
+        if (emails == null)
         {
             throw new EmailException("Address List provided was invalid");
         }
