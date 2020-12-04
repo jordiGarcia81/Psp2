@@ -45,7 +45,7 @@ public class MailSender implements Runnable {
 
             //Enviar los correos Práctica 2 ----- thread enviar email
 
-
+            String threadEmail = Thread.currentThread().getName();
 
 
 

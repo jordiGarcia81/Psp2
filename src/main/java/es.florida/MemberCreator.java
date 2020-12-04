@@ -27,15 +27,15 @@ public class MemberCreator implements Runnable  {
     private String generar(){
         String[] nombres={"Jordi","Juan","Carlos","Jesus","Damia","Pablo","Rafa","Noe","Cristian","Raquel","Cristina","Javier","Enrique"};
         String[] apellidos={"Garcia","Romero","Simon","Perez","Ruiz","Navarro","Gonzalez","Rodriguez","Martinez","Martin","Moreno","Alonso"};
-        String correo="testmailprueba2@gmail.com";
+        String [] correo={"@hotmail.com","@gmail.com","@floridauniversitaria.es"};
         Random random=new Random();
         int posNombre=random.nextInt(nombres.length);
         int posApellido=random.nextInt(apellidos.length);
+        int posCorreo = random.nextInt(correo.length);
+        System.out.println("nuevo email: "+nombres[posNombre]+" "+apellidos[posApellido]+" "+correo[posCorreo]);
 
-
-
-        String currentName = "Enviando correo a: "+nombres[posNombre]+" "+apellidos[posApellido]+" "+correo;
-        String output = currentName;
+        String currentMail = nombres[posNombre]+apellidos[posApellido]+correo[posCorreo];
+        String output = currentMail;
         return "\n"+output;
     }
     public void CrearMiembros() {
