@@ -26,7 +26,7 @@ public class App {
         memberMonitorThread.start();
         mailSenderThread.start();
 
-        executorService.execute(new Thread(mailSender));
+        /*executorService.execute(new Thread(mailSender));
         executorService.execute(new Thread(mailSender));
         executorService.execute(new Thread(mailSender));
         executorService.execute(new Thread(mailSender));
@@ -69,7 +69,7 @@ public class App {
         executorService.execute(new Thread(mailSender));
         executorService.execute(new Thread(mailSender));
         if(!executorService.awaitTermination(1, TimeUnit.SECONDS)){
-            executorService.shutdownNow();
+            executorService.shutdownNow();*/
         }
     }
-}
+

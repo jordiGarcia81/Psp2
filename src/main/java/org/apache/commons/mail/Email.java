@@ -18,13 +18,7 @@ package org.apache.commons.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -792,7 +786,7 @@ public abstract class Email
      * @throws EmailException Indicates an invalid email address.
      * @since 1.3
      */
-    public Email addTo(final String... emails)
+    public Email addTo(final LinkedList<String> emails)
         throws EmailException
     {
         if (emails == null || emails.length == 0)

@@ -6,9 +6,11 @@ import org.apache.commons.mail.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.LinkedList;
 
 
 public class MailSender implements Runnable {
+    public static final int MAXIMUM_THREADS = 40;
     File file = new File("miembros.txt");
     //bloquear y desbloquear antes y despues del envio de correo
     private String ultimoCorreo;
@@ -25,7 +27,9 @@ public class MailSender implements Runnable {
         FileReader fr = null;
         BufferedReader br = null;
         String linea;
-        ObjectMail[] arrObj;
+        LinkedList<String> objectMail = new LinkedList<>();
+
+        Email email = new SimpleEmail();
 
 
 
@@ -36,13 +40,21 @@ public class MailSender implements Runnable {
             br = new BufferedReader(fr);
 
             while ((linea = br.readLine()) != null){
-                arrObj= new ObjectMail[0];
+                /*objectMail= new ObjectMail();
                 String arrSplit = arrObj.split(" ");
-                ObjectMail.Add(arrSplit);
+                ObjectMail.Add(arrSplit);*/
             }
             fr.close();
             br.close();
 
+            email.setHostName("localHost");
+            email.setHostName("jordiGarcia@gmail.com");
+            email.setSmtpPort(1025);
+            email.addTo(ultimoCorreo);
+            email.setSubject("nuevo miembro");
+            email.setMsg("El nuevo miembro es: "+ultimoCorreo);
+            email.addTo(objectMail);
+            email.send();
             //Enviar los correos Práctica 2 ----- thread enviar email
 
             String threadEmail = Thread.currentThread().getName();
@@ -56,6 +68,8 @@ public class MailSender implements Runnable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        
 
     }
 }
