@@ -1,32 +1,30 @@
 package es.florida;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.io.*;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
 
 public class App {
+    public static final int PORT_HTTP = 9876;
 
-    public  static void main(String[]args) throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+    public static void  main(String[]args) throws IOException {
+        Socket socket = new Socket();
+        socket.connect(new InetSocketAddress("51.254.113.216",PORT_HTTP));
+        InputStream inputStream =  socket.getInputStream();
+        OutputStream outputStream = socket.getOutputStream();
 
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.execute(new ChildTask());
-        executorService.shutdown();
-
-        if(!executorService.awaitTermination(2, TimeUnit.SECONDS)){
-           executorService.shutdownNow() ;
+        BufferedReader reader = new BufferedReader ( new InputStreamReader(inputStream));
+        PrintWriter printer = new PrintWriter(new OutputStreamWriter(outputStream),true);
+        printer.println("HELP");
+        //printer.println("HELP");
+        //printer.println("HELP");
+        String line;
+        while((line = reader.readLine()) != null){
+            System.out.println(line);
         }
 
-        /*Thread thread1 = new Thread(new ChildTask());
-        Thread thread2 = new Thread(new ChildTask());
-        Thread thread3 = new Thread(new ChildTask());
-
-        thread1.start();
-        thread2.start();
-        thread3.start();*/
+        socket.close();
     }
-
 }
+
